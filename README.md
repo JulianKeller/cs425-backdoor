@@ -1,5 +1,20 @@
 # CS425 Network Backdoor Project #
 
+# TODO
+## Julian
+- [ ] setup fake network
+
+## Ben
+- [ ] setup javascript code that setups crontab or runs shell script
+
+## Tyler
+- [ ] setup fake google landing page that redirects 
+
+## Austin
+- [ ] google landing page, setup presentation
+
+
+
 # Authors #
 Julian Keller  
 Benjamin Eavenson  
