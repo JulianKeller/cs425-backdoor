@@ -73,6 +73,9 @@ Follow this tutorial: https://www.yeahhub.com/evil-twin-attack-dnsmasq-wireless-
 
 14. NOW startup the webserver, see the tutorial for more info
 
+15. Finally run the deauthorization attack and kick people off the legit network onto ours
+	- TODO will add details on this later too
+
 
 
 
