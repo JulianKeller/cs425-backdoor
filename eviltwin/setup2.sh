@@ -5,7 +5,8 @@
 UPDATE=true
 BRIDGE=wlan0 		# connected to internet, could be eth0 too
 WLAN=wlan1			# monitor mode wirless adapter
-WLANMON="{$WLAN}mon"
+MON=mon
+WLANMON=$WLAN$MON
 ESSID=TEST
 CHANNEL=11
 
