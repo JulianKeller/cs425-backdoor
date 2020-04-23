@@ -16,7 +16,7 @@ ifconfig $WLAN up
 
 # create the monitor network interface
 echo -e "Creating $WLAN monitor interface"
-airmong-ng start $WLAN
+airmon-ng start $WLAN
 
 # start up the evil twin AP (access point)
 # 	Give the evil twin the same name as the network you are attacking for best results

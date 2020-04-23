@@ -39,6 +39,11 @@ Follow this tutorial: https://www.yeahhub.com/evil-twin-attack-dnsmasq-wireless-
 	see that it is connected with: `iwconfig`
 	It should be named wlan0 or wlan1
 
+5.5 Ensure the wireless card is not connected to internet
+	`nmcli con`
+	Disconnect from the network that is connected to our adapter
+	`nmcli con down <UUID>`
+
 6. Enable the wireless adapter
 	`ifconfig wlan1 up`
 
