@@ -2,7 +2,7 @@
 
 # this script sets up the evil twin
 
-UPDATE=true
+UPDATE=false
 BRIDGE=wlan0 		# connected to internet, could be eth0 too
 WLAN=wlan1			# monitor mode wirless adapter
 ESSID=TEST
