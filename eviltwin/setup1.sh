@@ -2,8 +2,6 @@
 
 # this script sets up the evil twin
 
-UPDATE=false
-BRIDGE=wlan0 		# connected to internet, could be eth0 too
 WLAN=wlan1			# monitor mode wirless adapter
 MON=mon
 WLANMON=$WLAN$MON
@@ -16,7 +14,7 @@ ifconfig $WLAN up
 
 # create the monitor network interface
 echo -e "Creating $WLAN monitor interface"
-airmong-ng start $WLAN
+airmon-ng start $WLAN
 
 # start up the evil twin AP (access point)
 # 	Give the evil twin the same name as the network you are attacking for best results
