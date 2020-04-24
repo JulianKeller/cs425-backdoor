@@ -16,6 +16,11 @@ if [ "$UPDATE" = true ]; then
 		
 	# Install dnsmasq
 	apt-get install dnsmasq
+
+	git clone https://github.com/trustedsec/social-engineer-toolkit/ setoolkit/
+	cd setoolkit
+	pip3 install -r requirements.txt
+	python3 setup.py
 fi
 	
 # Configure dns masq
