@@ -3,19 +3,13 @@
 # this script installs required packages and does some configuration setup
 
 UPDATE=false
-BRIDGE=wlan0 			# connected to internet, could be eth0 too
-WLAN=wlan1			# monitor mode wirless adapter
-MON=mon
-WLANMON=$WLAN$MON
-ESSID=TEST
-CHANNEL=11
 
 if [ "$UPDATE" = true ]; then
 	# update the device
 	sudo apt-get update
 
 	# install dnsmasq
-	sudo apt-get install dnsmasq
+	sudo apt-get install dnsmasq dsniff
 
 	# Update Device
 	sudo apt-get update
@@ -46,3 +40,4 @@ if [ $COUNT -eq 0 ]; then
 [keyfile]
 unmanaged-devices:mac=AA:BB:CC:DD:EE:FF, A2:B2:C2:D2:E2:F2" >> /etc/NetworkManager/NetworkManager.conf
 fi
+

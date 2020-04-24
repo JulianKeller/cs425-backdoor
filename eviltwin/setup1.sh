@@ -2,8 +2,6 @@
 
 # this script sets up the evil twin
 
-UPDATE=false
-BRIDGE=wlan0 		# connected to internet, could be eth0 too
 WLAN=wlan1			# monitor mode wirless adapter
 MON=mon
 WLANMON=$WLAN$MON
