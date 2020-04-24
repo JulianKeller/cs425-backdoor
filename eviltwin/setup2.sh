@@ -30,4 +30,4 @@ echo -e "Enabling port forwarding"
 echo 1 > /proc/sys/net/ipv4/ip_forward
 
 # evil twin is now setup, now need to allocate ip addresses to clients
-dnsmasq -C /root/Desktop/eviltwin/dnsmasq.conf -d
+dnsmasq -C config/dnsmasq.conf -d
