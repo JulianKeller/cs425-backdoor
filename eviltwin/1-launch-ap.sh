@@ -1,6 +1,6 @@
 #! /bin/bash
 
-# this script sets up the evil twin
+# this script sets up the evil twin access point
 
 WLAN=wlan1			# monitor mode wirless adapter
 MON=mon

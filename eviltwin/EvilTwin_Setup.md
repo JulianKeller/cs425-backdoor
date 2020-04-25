@@ -1,5 +1,6 @@
 How to Setup the Evil Network:
 Follow this tutorial: https://www.yeahhub.com/evil-twin-attack-dnsmasq-wireless-wpa2-psk-cracking/
+This one is good too: rootsh3ll.com/evil-twin-attack/
 
 # Prerequisites
 - kali linux
@@ -91,6 +92,8 @@ Follow this tutorial: https://www.yeahhub.com/evil-twin-attack-dnsmasq-wireless-
 16. now deauthorize clients so they connect to our network
 	aireplay-ng –deauth 0 -a <BSSID> wlan0mon
 
+# Caveats
+Only works for http websites, not https websites 
 
 
 
