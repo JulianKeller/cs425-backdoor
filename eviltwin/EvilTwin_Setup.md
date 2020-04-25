@@ -2,6 +2,10 @@ How to Setup the Evil Network:
 Follow this tutorial: https://www.yeahhub.com/evil-twin-attack-dnsmasq-wireless-wpa2-psk-cracking/
 This one is good too: rootsh3ll.com/evil-twin-attack/
 
+# TODO
+- need to capture the specific device with airodump-ng wlan1mon
+- must make sure monitoring wlan1 is not connected to internet
+
 # Prerequisites
 - kali linux
 - may need an external usb wifi adapter

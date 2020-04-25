@@ -5,7 +5,7 @@
 WLAN=wlan1			# monitor mode wirless adapter
 MON=mon
 WLANMON=$WLAN$MON
-ESSID=TEST
+ESSID=zzzz
 CHANNEL=11
 
 # Enable the wireless adapter
