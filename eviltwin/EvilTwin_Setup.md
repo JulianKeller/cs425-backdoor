@@ -1,7 +1,5 @@
-How to Setup the Evil Network:
-Follow this tutorial: https://www.yeahhub.com/evil-twin-attack-dnsmasq-wireless-wpa2-psk-cracking/
-This one is good too: rootsh3ll.com/evil-twin-attack/
-
+# How to Setup the Evil Network:
+This document outlines the steps we took in order to setup an evil twin access point and cause clients to be redirected to a malicious website.
 # TODO
 - need to capture the specific device with airodump-ng wlan1mon
 - must make sure monitoring wlan1 is not connected to internet
@@ -98,6 +96,10 @@ This one is good too: rootsh3ll.com/evil-twin-attack/
 
 # Caveats
 Only works for http websites, not https websites 
+
+## Sources
+Follow this tutorial: https://www.yeahhub.com/evil-twin-attack-dnsmasq-wireless-wpa2-psk-cracking/
+This one is good too: rootsh3ll.com/evil-twin-attack/
 
 
 
