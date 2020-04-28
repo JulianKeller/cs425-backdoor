@@ -53,6 +53,7 @@ This document outlines the steps we took in order to setup an evil twin access p
 4. View available internet interfaces  
 	`iwconfig`
 	You should see several devices such as eth0, wlan0, lo, etc.
+	![network interfaces] (https://github.com/tylerhiggins/cs425-backdoor/blob/tutorial/screenshots/4.0-iwconfig.png)
 	Now plug in your usb wireless adapter and run the command again.
 	`iwconfig`
 	You should see your new network device with the name of something like wlan1 for example. You will need this for the next step.
