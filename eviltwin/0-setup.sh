@@ -11,12 +11,7 @@ if [ "$UPDATE" = true ]; then
 	# install dnsmasq
 	sudo apt-get install dnsmasq dsniff mariadb-server
 
-	# Update Device
-	sudo apt-get update
-		
-	# Install dnsmasq
-	apt-get install dnsmasq
-
+	# install
 	git clone https://github.com/trustedsec/social-engineer-toolkit/ setoolkit/
 	cd setoolkit
 	pip3 install  Cython
