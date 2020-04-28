@@ -57,6 +57,7 @@ This document outlines the steps we took in order to setup an evil twin access p
 	Now plug in your usb wireless adapter and run the command again.
 	`iwconfig`
 	You should see your new network device with the name of something like wlan1 for example. You will need this for the next step.
+	![network interfaces 2](https://github.com/tylerhiggins/cs425-backdoor/blob/tutorial/screenshots/4.1-iwconfig.png)
 
 5. Enable the wireless adapter  
 	`ifconfig wlan1 up`
@@ -73,6 +74,7 @@ This document outlines the steps we took in order to setup an evil twin access p
 8. Look at iwconfig again and we can see our new network monitoring device.  
 	`iwconfig`
 	It will have a name such as `wlan1mon`.
+	![network interfaces](https://github.com/tylerhiggins/cs425-backdoor/blob/tutorial/screenshots/8.0-iwconfig.png)
 
 9. Find the device to spoof and record the BSSID (mac address), channel, and ESSID  
 	 First update known manufacturer mac addresses of routers: `airodump-ng-oui-update`
@@ -81,10 +83,12 @@ This document outlines the steps we took in order to setup an evil twin access p
 	Look under the ESSID column for the name of the network you want to spoof.
 	When you see it hit `ctrl+c` and then copy that line to a text file.
 	Copy down the BSSID (MAC address), CH (channel), and ESSID (Wireless access point name) values.
+	![airodump](https://github.com/tylerhiggins/cs425-backdoor/blob/tutorial/screenshots/9.0-airodump.png)
 
 10. Now for fun, take a look at the devices connected to that network.  
 	Enter the BSSID from the previous step in this command
 	`airodump-ng -d <BSSID> wlan1mon`
+	![devices](https://github.com/tylerhiggins/cs425-backdoor/blob/tutorial/screenshots/10.0-airodump.png)
 
 11. Lets boost our signal strength, to the max legal limit in the US.  
 	Note that not all wireless adapters support this.
