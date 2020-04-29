@@ -64,7 +64,7 @@ Note: In this writeup we use wlan1 as our wireless access point and wlan0 as our
 	`vim /etc/NetworkManager/NetworkManager.conf`
 
 	Add these lines to the end of the file to resolve conflicts between airmon-ng and the NetworkManager. 
-	Replace `A2:B2:C2:D2:E2:F2` with the MAC address of the wireless adapter obtained in the previous step with `iwconfig`. 
+	Replace `A2:B2:C2:D2:E2:F2` with the MAC address of the wireless adapter. 
 	```
 	[keyfile]
 	unmanaged-devices:mac=AA:BB:CC:DD:EE:FF, A2:B2:C2:D2:E2:F2
