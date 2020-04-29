@@ -99,6 +99,7 @@ Note: In this writeup we use wlan1 as our wireless access point and wlan0 as our
 	and then copy the line with the device to attack into a text file.
 	Copy down the BSSID (MAC address), CH (channel), and ESSID (Wireless access point name) values.
 	![airodump](../screenshots/9.0-airodump.png)
+	Note the blurred out details are all of my neighbors routers. Pretty neat, but excluded for privacy.
 
 10. Now for fun, take a look at the devices connected to that network.  
 	Enter the BSSID from the previous step in this command:  
