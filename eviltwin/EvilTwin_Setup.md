@@ -139,6 +139,9 @@ This document outlines the steps we took in order to setup an evil twin access p
 	`/var/www/html/index.html`  
 	Start the server:  
 	`sudo /etc/init.d/apache2 start`
+	
+	Here is our example webpage named `index.html`
+	![index](https://github.com/tylerhiggins/cs425-backdoor/blob/tutorial/screenshots/17-index.png)
 
 18. Your apache server is running locally. Record the servers IP address.  
 	Either localhost or the devices ip address can be used.  
