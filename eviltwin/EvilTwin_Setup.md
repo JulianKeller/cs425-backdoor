@@ -54,10 +54,10 @@ This document outlines the steps we took in order to setup an evil twin access p
 4. View available internet interfaces  
 	`iwconfig`  
 	You should see several devices such as eth0, wlan0, lo, etc.
-	![network interfaces](https://github.com/tylerhiggins/cs425-backdoor/blob/tutorial/screenshots/4.0-iwconfig.png)
+	![network interfaces](../screenshots/4.0-iwconfig.png)
 	
 	Now plug in your usb wireless adapter and run `iwconfig` again. You should see your new network device with the name of something like wlan1 for example. You will need this for the next step.
-	![network interfaces 2](https://github.com/tylerhiggins/cs425-backdoor/blob/tutorial/screenshots/4.1-iwconfig.png)
+	![network interfaces 2](../screenshots/4.1-iwconfig.png)
 
 5. Enable the wireless adapter  
 	`ifconfig wlan1 up`
@@ -74,7 +74,7 @@ This document outlines the steps we took in order to setup an evil twin access p
 8. Look at iwconfig again and we can see our new network monitoring device.  
 	`iwconfig`
 	It will have a name such as `wlan1mon`.
-	![network interfaces](https://github.com/tylerhiggins/cs425-backdoor/blob/tutorial/screenshots/8.0-iwconfig.png)
+	![network interfaces](../screenshots/8.0-iwconfig.png)
 
 9. Find the device to spoof and record the BSSID (mac address), channel, and ESSID.  
 	 - First update known manufacturer mac addresses of routers:  
@@ -87,12 +87,12 @@ This document outlines the steps we took in order to setup an evil twin access p
 	`ctrl+c`  
 	and then copy that line to a text file.
 	Copy down the BSSID (MAC address), CH (channel), and ESSID (Wireless access point name) values.
-	![airodump](https://github.com/tylerhiggins/cs425-backdoor/blob/tutorial/screenshots/9.0-airodump.png)
+	![airodump](../screenshots/9.0-airodump.png)
 
 10. Now for fun, take a look at the devices connected to that network.  
 	Enter the BSSID from the previous step in this command:  
 	`airodump-ng -d A0:A0:A0:00:00:A0 wlan1mon`
-	![devices](https://github.com/tylerhiggins/cs425-backdoor/blob/tutorial/screenshots/10.0-airodump.png)
+	![devices](../screenshots/10.0-airodump.png)
 
 11. Lets boost our signal strength, to the max legal limit in the US.  
 	(Note that not all wireless adapters support this.)
@@ -168,8 +168,8 @@ This document outlines the steps we took in order to setup an evil twin access p
 Only works for http websites, not https websites 
 
 ## Sources
-Follow this tutorial: https://www.yeahhub.com/evil-twin-attack-dnsmasq-wireless-wpa2-psk-cracking/
-This one is good too: rootsh3ll.com/evil-twin-attack/
+- https://www.yeahhub.com/evil-twin-attack-dnsmasq-wireless-wpa2-psk-cracking/
+- https://www.rootsh3ll.com/evil-twin-attack/
 
 
 
