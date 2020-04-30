@@ -3,6 +3,7 @@
 # this script installs required packages and does some configuration setup
 
 UPDATE=false
+USB_WIFI_ADAPTER=1A:48:98:63:A6:7E
 
 if [ "$UPDATE" = true ]; then
 	# update the device
@@ -33,12 +34,12 @@ log-dhcp
 listen-address=127.0.0.1" > config/dnsmasq.conf
 
 # check if the file was updated already
-COUNT=$(grep -c "unmanaged-devices:mac=AA:BB:CC:DD:EE:FF, A2:B2:C2:D2:E2:F2" /etc/NetworkManager/NetworkManager.conf)
+COUNT=$(grep -c "unmanaged-devices:mac=$USB_WIFI_ADAPTER" /etc/NetworkManager/NetworkManager.conf)
 if [ $COUNT -eq 0 ]; then
 	# Update NetworkManager.conf, Add these lines to the end: 
 	echo -e "Configuring NetworkManager"
 	echo "
 [keyfile]
-unmanaged-devices:mac=AA:BB:CC:DD:EE:FF, A2:B2:C2:D2:E2:F2" >> /etc/NetworkManager/NetworkManager.conf
+unmanaged-devices:mac=$USB_WIFI_ADAPTER" >> /etc/NetworkManager/NetworkManager.conf
 fi
 
