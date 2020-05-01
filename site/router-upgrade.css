@@ -1,9 +1,73 @@
-
-
 body {
-    background: whitesmoke;
+    background-color: #3895D3;
 }
 
-h1 {
-    color: red;
+.main {
+	background-color: white;
+	margin-left: 150px;
+	margin-right: 150px;
+	padding-bottom: 30px;
+
+
 }
+.info_div {
+	background-color: #24292D;
+	color: whitesmoke;
+	padding-top: 2px;
+}
+
+#info {
+	margin-left: 10px;
+	margin-top: 0px;
+	margin-bottom: 1px;
+}
+
+.banner {
+	padding-top: 20px;
+	padding-bottom: 20px;
+	background-image: url('./img/bannerbg.jpg')
+}
+.banner h1 {
+	color: whitesmoke;
+}
+
+#warning_table,
+#admin_table  {
+	border-style: solid;
+	border-color: black;
+	margin-left: 70px;
+	margin-top: 50px;
+	text-align: left;
+}
+
+#warning_table {
+	margin-right: 70px;
+}
+
+#warning_table h4,
+#admin_table h4 {
+	margin-left: 10px;
+}
+#warning_table th {
+	background-color: #BA0000;
+	color: white;
+}
+
+#admin_table th {
+	background-color: #24292D;
+	color: white;
+	padding-right: 330px;
+}
+
+#msg {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+#footer {
+	margin-top: 15px;
+	text-align: center;
+	color: white;
+}
+
+
