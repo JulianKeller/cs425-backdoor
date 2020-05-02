@@ -2,9 +2,6 @@
 
 # this script installs required packages and does some configuration setup
 
-# UPDATE=false
-# USB_WIFI_ADAPTER=1A:48:98:63:A6:7E
-
 CONFIG="eviltwin.config"
 if test -f $CONFIG ; then
 	source $CONFIG
@@ -50,4 +47,3 @@ if [ $COUNT -eq 0 ]; then
 [keyfile]
 unmanaged-devices:mac=$USB_WIFI_ADAPTER" >> /etc/NetworkManager/NetworkManager.conf
 fi
-

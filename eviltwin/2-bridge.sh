@@ -1,7 +1,6 @@
 #! /bin/bash
 
 # this script sets up the dns server and bridging the monitor device to the internet connected device
-# BRIDGE=wlan0			# the device connected to internet to be bridged, could be eth0, wlan0, wlan1
 
 CONFIG="eviltwin.config"
 if test -f $CONFIG ; then

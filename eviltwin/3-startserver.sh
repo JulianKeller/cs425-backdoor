@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# launches an apache server and copies our website from the repo to the server location
+
 file=/var/www/html/index.html
 echo "Copying index.html & script.js"
 if [ -f "$file" ];

