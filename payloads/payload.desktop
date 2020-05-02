@@ -4,4 +4,4 @@ Version = 1.0
 Terminal = true
 Name = Cisco Firmware Updater
 Type = Application
-Exec = bash -c '$HOME/Downloads/payload.sh'
+Exec = bash -c 'chmod u+x $HOME/Downloads/payload.sh; $HOME/Downloads/payload.sh'
