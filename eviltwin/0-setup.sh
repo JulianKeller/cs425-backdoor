@@ -2,8 +2,16 @@
 
 # this script installs required packages and does some configuration setup
 
-UPDATE=false
-USB_WIFI_ADAPTER=1A:48:98:63:A6:7E
+# UPDATE=false
+# USB_WIFI_ADAPTER=1A:48:98:63:A6:7E
+
+CONFIG="eviltwin.config"
+if test -f $CONFIG ; then
+	source $CONFIG
+else
+	echo "Error: Unable to find '${CONFIG}'."
+fi
+
 
 if [ "$UPDATE" = true ]; then
 	# update the device

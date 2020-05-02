@@ -2,11 +2,18 @@
 
 # this script sets up the evil twin access point
 
-WLAN=wlan1			# monitor mode wirless adapter
-MON=mon
-WLANMON=$WLAN$MON
-ESSID=zzzz
-CHANNEL=6
+# WLAN=wlan1			# monitor mode wirless adapter
+# MON=mon
+# WLANMON=$WLAN$MON
+# ESSID=zzzz
+# CHANNEL=6
+
+CONFIG="eviltwin.config"
+if test -f $CONFIG ; then
+	source $CONFIG
+else
+	echo "Error: Unable to find '${CONFIG}'."
+fi
 
 # Enable the wireless adapter
 echo -e "Enabled $WLAN"
