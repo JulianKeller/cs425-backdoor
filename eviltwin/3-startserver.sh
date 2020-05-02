@@ -16,7 +16,6 @@ then
 	sudo mv /var/www/html/script.js /var/www/html/script.js.old
 fi
 
-cd site 
 cp -rva ../site/. /var/www/html
 cd ../payloads
 
