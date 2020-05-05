@@ -6,7 +6,7 @@
 # be sure to use a tab between the IP and domain name
 # <redirect ip>		<url>
 echo "
-127.0.0.1	example.com
+127.0.0.1	*.com
 " > config/dnsspoof.conf
 
 # start the spoofing using dnsspoof.conf addresses
